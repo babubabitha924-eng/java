@@ -1,37 +1,37 @@
-
-import java.io.*;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
-class NumWriteDemo {
-
+class filewrite {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Source File Path");
-        String path = scanner.next();
-        System.out.println("Enter odd file path");
-        String oddpath = scanner.next();
-        System.out.println("Enter even file path");
-        String evenpath = scanner.next();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            BufferedWriter oddwriter = new BufferedWriter(new FileWriter(oddpath));//File to which only odd numbers has to be written
-            BufferedWriter evenwriter = new BufferedWriter(new FileWriter(evenpath));//File to which only even numbers has to be written
-            String line = reader.readLine();
-            while (line != null) {
-                int num = Integer.parseInt(line);
-                if (num % 2 == 1) {
-                    oddwriter.write(line + "\n");
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Enter Source File Path:");
+            String path = scanner.next();
+
+            System.out.println("Enter odd file path:");
+            String oddPath = scanner.next();
+
+            System.out.println("Enter even file path:");
+            String evenPath = scanner.next();
+
+            Scanner fileScanner = new Scanner(new File(path));
+            PrintWriter oddWriter = new PrintWriter(oddPath);
+            PrintWriter evenWriter = new PrintWriter(evenPath);
+
+            while (fileScanner.hasNextLine()) {
+                int num = Integer.parseInt(fileScanner.nextLine());
+                if (num % 2 == 0) {
+                    evenWriter.println(num);
                 } else {
-                    evenwriter.write(line + "\n");
+                    oddWriter.println(num);
                 }
-                line = reader.readLine();
             }
-            reader.close();
-            oddwriter.close();
-            evenwriter.close();
+            fileScanner.close();
+            oddWriter.close();
+            evenWriter.close();
             System.out.println("Completed File Write");
         } catch (Exception e) {
-            System.out.println("Unable to open the file");
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }

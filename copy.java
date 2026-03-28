@@ -1,27 +1,33 @@
-
 import java.io.*;
+import java.util.Scanner;
 
 class FileCopy {
-
     public static void main(String[] args) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Scanner sc = new Scanner(System.in);
+
         try {
-            System.out.println("Enter Source File path");
-            String sourcePath = reader.readLine();
-            System.out.println("Enter Destination File path");
-            String destinationPath = reader.readLine();
-            byte[] buffer = new byte[1024];
-            FileInputStream inputStream = new FileInputStream(new File(sourcePath));
-            FileOutputStream outputStream = new FileOutputStream(new File(destinationPath));
+            System.out.print("Enter source file: ");
+            String src = sc.nextLine();
+
+            System.out.print("Enter destination file: ");
+            String dest = sc.nextLine();
+
+            FileInputStream inputStream = new FileInputStream(src);
+            FileOutputStream outputStream = new FileOutputStream(dest);
+
+            byte[] buffer;
             buffer = inputStream.readAllBytes();
             outputStream.write(buffer);
+
             outputStream.close();
             inputStream.close();
+
             System.out.println("File Copied");
 
         } catch (Exception e) {
-            System.err.println(e);
+            System.out.println(e);
         }
 
+        sc.close();
     }
 }
