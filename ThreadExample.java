@@ -11,7 +11,7 @@ class MultiplicationTable extends Thread
     }
 }
 
-class PrimeNumbers extends Thread 
+class PrimeNumbers extends  Thread 
 {
     private int n;
 

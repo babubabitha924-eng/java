@@ -42,25 +42,3 @@ public class interfacesports {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-public class interfacesports {
-    
-}
